@@ -1,0 +1,203 @@
+---
+title: 'Learn To Code, Chapter 1: Variables, Operators, and Expressions'
+author: "Nick V. Flor"
+date: "1/22/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# OUTLINE
+
+Very basic concepts in programming: 
+- Variables 
+- Operators 
+- Expressions
+
+# INTRODUCTION
+
+You already have the basic skills needed to program, let me prove it to you by having you solve this problem:
+
+> Suppose you're out shopping for shoes, and you find a pair that you'd like to buy. The shoes cost $100 and your sales tax is 10%. How much will you pay at the cash register?
+
+As you've probably guessed the answer is $110.
+
+Now let me ask you this: How did you solve it? You'd probably say: "Well tax is $10 so you add that to the price to get the total". 
+
+Correct, _except_,you didn't describe all your steps. You actually did more steps in your head than what you said. This is probably how you really solved the problem, you:
+
+>
+* Remembered the price was $100
+* Remembered that sales tax is 10%
+* Calculated tax as price($100) multiplied by sales tax (10%), = $10, and you remembered that value
+* Added the tax to the sales price to get the total
+* Said the total
+
+If you're going to program a computer to calculate total price, you can't skip steps. Computers can only do exactly what you instruct them to do, they won't fill in the steps like a person would do. So, if you miss a step, you'll either get a bad answer or, worse, the computer will crash and won't run your program.  
+Once you've determined all the steps, programming a computer to do them is straightforward. Here are the equivalent steps in a language the computer can understand, the R programming language (https://mran.microsoft.com/documents/what-is-r): 
+
+```{r}
+price = 100
+salesTax = 0.10 # Have to write 10% as 10/100, or 0.10
+tax = price * salesTax
+total = price + tax
+print(total)
+```
+
+Click on the run button in the upper right corner of the _code block_ to see. 
+
+
+## HANDS-ON: Try modifying the initial values above
+
+> Modify the code above to use different prices and different sales taxes. Just make sure you write the sales tax as a decimal. For example, if sales tax was 7.5%, you would replace the 0.10 with 0.075.
+> After you modify the values, click the green run button in the upper-right corner of the code block.
+> Your goal is simple: understand how the computer is arriving a the total
+
+# CONCEPT DEEP DIVE: VARIABLES
+The first programming concept you should know is _variables_. In the above code, salesTax, tax, and total are variables. The function of a Variable is to remember, i.e., store, either values (100 and 0.10) or the results of calculations. 
+
+The name, i.e., label, you choose for a variable has to follow specific rules. The most important rules is that it has to start with a letter or an underscore ("_"). Note that all the variables above start with a letter. 
+
+After the first letter or underscore, you can mix numbers, underscores, and of course more letters. For example, instead of salesTax, valid alternatives variable names include: 
+
+* st
+* sales_tax
+* sales123tax_
+* salestax10, 
+* sAlEsTaX
+* SaLeStAx
+* fred
+* s1234567890
+
+There are an infinite number of variable names, and you can even create variable names that are nonsensical for our sales calculation like fred.
+
+Now, here are sxamples of bad variable names:
+
+* sales tax (can't have spaces in variables names. I repeat: __you cannot have spaces in variable names_)
+* 10salesTax (can't start with a number)
+
+_Side-note_: R allows you to add periods (".") in variable names, e.g., sales.tax. But don't do this because other programming languages like C, Javascript, Python, and Julia don't allow you to do this. And you don't want to pick up bad habits if you have to use these other programming languages.
+
+*Important note:* variable names are _case-sensitive_. This means the computer treats salesTax (first letter is a lower-case, or little, s), as different from SalesTax (first letter is an upper-case, or capital, S). A very common programming bug, which can be hard to find, is the case error.
+
+*Pro-Tip*: Choose variable names that are meaningful, e.g., salesTax, SalesTax, or sales_tax — not s, or fred, or st. This makes it easier for you to understand your code, and for other people to understand your code.
+
+
+> Naming conventions in variables with multiple words, e.g., salesTax:
+* Camel case: first letter of a word is lower case, other words start with an upper-case letter, e.g., salesTax. Most programmers use camel case.
+* Pascal case: first letter of a word is upper case, other words start with an upper-case letter, e.g., SalesTax. Microsoft code uses Pascale case.
+* Snake case: all words are lower case separated by underscores, e.g., sales_tax.
+
+
+## HANDS-ON: Try changing variable names in the code block
+
+1. Try changing a variable name to another legal variable name, e.g., changing salesTax to sales_tax. But remember, you have to change ALL instances of the variable name. salesTax occurs twice, so if you change it to sales_tax, you have to make two changes. price occurs three times, so if you change it to Price, you have to make three changes.
+2. Try changing a variable name to an illegal variable name, e.g., changing salesTax to sales tax.
+
+Don't forget to run and to check the value to see if the code does what you expect.
+
+
+# CONCEPT DEEP DIVE: OPERATORS 
+
+There are two operators in the code block above, multiplication, denoted by an asterisk (*) and additions, denoted by a plus sign (+). The other arithmetic operators are subtraction, denoted by the dash symbol (-), and division denoted by a slash symbol (/). You can also raise something to a power using the caret symbol (^)
+
+To summarize: 
+- addition: +
+- subtraction: -
+- multiplication: *
+- division: /
+- power: ^
+
+And here's an example
+```{r}
+2+3
+2-3
+2*3
+2/3
+2^3
+```
+
+Of course we could have used variables:
+```{r}
+a=2
+b=3
+a+b
+a-b
+a*b
+a/b
+a^b
+```
+
+# CONCEPT DEEP DIVE: EXPRESSIONS & OPERATOR PRECEDENCE
+
+An _expression_ is a combination of variables and operators that evaluates to a new value. The above examples were simple expressions that only used one arithmetic operator per line, but what if you had a more complex expression that combined multiple values and arithmetic operators? 
+
+For example, suppose a=2, b=3, and c=4. What is a+b*c?
+
+If you answered 20, that is incorrect. The answer is 14, and you can try it below:
+
+```{r}
+a=2
+b=3
+c=4
+a+b*c
+```
+
+The reason is that R, like most programming languages has what's known as _operator precedence_. This is a fancy way of saying that if you have an equation with  multiple operators on the same line, some operations will be done before others.
+
+R and most programming languages use the PEMDAS rule. Anything in parentheses is done first, followed by exponents (power), followed by multiplication or division, followed by addition or subtraction.
+
+That's a lot to take in. It's easier to see it in action. Suppose a=2, b=3, c=4, and d=5. What will the following code print out? Try to do this in your head before you click the run button. And, no, 1225 is not the right answer.
+
+```{r}
+a=2
+b=3
+c=4
+d=5
+b+c*d^a
+```
+The answer is 103. Now, if you want to get 1225 you have to use parentheses. You can also get 175 with parentheses:
+
+```{r}
+a=2
+b=3
+c=4
+d=5
+((b+c)*d)^a
+(b+c)*(d^a)
+```
+
+Pro-tip: You should remember the operator precedence rule (PEMDAS), and only use parentheses if you really need them.
+
+Note that I didn't remember the values of the expressions by storing them in variables. I'll do that now, and I want you to click the run button and compare the output with the block above.
+
+```{r}
+a=2
+b=3
+c=4
+d=5
+answer1=((b+c)*d)^a
+answer2=(b+c)*(d^a)
+```
+
+There's no output! The reason is that you stored the answers in variables (named answer1 and answer2), and unless you type the names of the variables by themselves, R won't display them.  If R didn't do this, then your output would be very cluttered. Anyway, here I type the names of the variables by themselves.
+
+```{r}
+a=2
+b=3
+c=4
+d=5
+answer1=((b+c)*d)^a
+answer2=(b+c)*(d^a)
+answer1
+answer2
+```
+
+That's not to say that R hasn't remembered the values. If you look in the upper right corner of RStudio, you should see a Values panel that has all the variables that R is currently remembering (storing).
+
+# Things to try on your own
+
+I'm a big believer in explaining concepts to other people as a way of checking if you really understand a concept. Talk to a friend or family member and try explaining variables, operators, and expressions. If your grandma understand what you're talking about, you probably know the concept well.
